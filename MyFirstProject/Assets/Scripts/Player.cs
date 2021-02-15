@@ -13,17 +13,17 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-
     }
-
     void Start()
     {
-
+    }
+    private void LateUpdate()
+    {
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
             _fire = true;
         _direction.z = Input.GetAxis("Vertical");
         _direction.x = Input.GetAxis("Horizontal");
@@ -48,11 +48,8 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-        var speed = _direction * _speed * Time.fixedDeltaTime;
+        var speed = _direction * _speed * Time.fixedDeltaTime*3;
         transform.Translate(speed);
-    }
-    private void LateUpdate()
-    { 
     }
     private void Fire()
     {
@@ -60,4 +57,4 @@ public class Player : MonoBehaviour
         bullet.Init(_damage);
         _fire = false;
     }
-}
+  }
