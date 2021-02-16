@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         _direction.z = Input.GetAxis("Vertical");
         _direction.x = Input.GetAxis("Horizontal");
 
-        //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         //    _direction.z = 1;
         //else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         //    _direction.z = -1;
