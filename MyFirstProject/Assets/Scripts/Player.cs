@@ -10,17 +10,6 @@ public class Player : MonoBehaviour
                      private bool _fire = false;
                      private int _damage = 4;
                      private Vector3 _direction = Vector3.zero;
-
-    private void Awake()
-    {
-    }
-    void Start()
-    {
-    }
-    private void LateUpdate()
-    {
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -28,7 +17,7 @@ public class Player : MonoBehaviour
         _direction.z = Input.GetAxis("Vertical");
         _direction.x = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         //    _direction.z = 1;
         //else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         //    _direction.z = -1;
