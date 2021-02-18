@@ -11,11 +11,11 @@ public class Player : MonoBehaviour
                      private bool _fire = false;
                      private int _damage = 25;
                      private Vector3 _direction = Vector3.zero;
-                     public int _health = 100;
+                     public int health = 100;
                      public int _ammo = 21;
     private void Awake()
     {
-        _health = 100;
+        health = 100;
     }
     void Update()
     {
@@ -40,11 +40,11 @@ public class Player : MonoBehaviour
     }
     public void TakeCare(int HP)
     {
-        _health += HP;
+        health += HP;
     }
     public void TakeDamage(int damage)
     {
-        _health -= damage;
+        health -= damage;
         //if (_health <= 0) Destroy(gameObject);
     }
 }

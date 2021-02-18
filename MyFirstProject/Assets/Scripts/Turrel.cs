@@ -13,8 +13,6 @@ public class Turrel : MonoBehaviour
                      private float _timer = 1f; // таймер, чтобы туррель не стреляла слишком часто
     private void Update()
     {
-
-
         //от таймера отнимаем дельтатайм
         _timer -= Time.deltaTime;
 
