@@ -6,48 +6,45 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform _bulletStartPosition;
-    [SerializeField] private float _speed = 5;
-    [SerializeField] private float _rotationSpeed = 45;
+                     private float _speed = 5;
+                     private float _rotationSpeed = 45;
                      private bool _fire = false;
-                     private int _damage = 4;
+                     private int _damage = 25;
                      private Vector3 _direction = Vector3.zero;
-                     private Transform _target = null;
+                     public int _health = 100;
+                     public int _ammo = 21;
+    private void Awake()
+    {
+        _health = 100;
+    }
     void Update()
     {
-        _target = GameObject.FindGameObjectWithTag("Enemy").transform;
-        if (Input.GetMouseButtonDown(0))
-            _fire = true;
+        if (Input.GetMouseButtonDown(0)) _fire = true;
         _direction.z = Input.GetAxis("Vertical");
-        //_direction.x = Input.GetAxis("Horizontal");
-
-        //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        //    _direction.z = 1;
-        //else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        //    _direction.z = -1;
-        //else _direction.z = 0;
-
-        //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        //    _direction.x = -1;
-        //else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        //    _direction.x = 1;
-        //else _direction.x = 0;
     }
     private void FixedUpdate()
     {
-        if (_fire) 
-            Fire();
+        if (_fire) Fire();
         Move();
-        transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
     private void Move()
     {
-        var speed = _direction * _speed * Time.fixedDeltaTime*3;
-        transform.Translate(speed);
+        transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
+        transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
     private void Fire()
     {
-        var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, Quaternion.identity).GetComponent<Bullet>();
-        bullet.Init(_damage, _target);
+        var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
+        bullet.Init(_damage);
         _fire = false;
     }
-  }
+    public void TakeCare(int HP)
+    {
+        _health += HP;
+    }
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        //if (_health <= 0) Destroy(gameObject);
+    }
+}

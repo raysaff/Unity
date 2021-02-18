@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 4234722822636828388}
   m_Layer: 0
   m_Name: Turrel
-  m_TagString: Untagged
+  m_TagString: Turrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
