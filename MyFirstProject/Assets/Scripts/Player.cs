@@ -6,16 +6,16 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform _bulletStartPosition;
+    [SerializeField] private int _health = 100;
                      private float _speed = 5;
                      private float _rotationSpeed = 45;
                      private bool _fire = false;
                      private int _damage = 25;
                      private Vector3 _direction = Vector3.zero;
-                     public int health = 100;
                      public int _ammo = 21;
     private void Awake()
     {
-        health = 100;
+        _health = 100;
     }
     void Update()
     {
@@ -40,11 +40,11 @@ public class Player : MonoBehaviour
     }
     public void TakeCare(int HP)
     {
-        health += HP;
+        _health += HP;
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        _health -= damage;
         //if (_health <= 0) Destroy(gameObject);
     }
 }
