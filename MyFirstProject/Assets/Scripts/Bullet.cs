@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Bullet: MonoBehaviour
 {
-    [SerializeField] private float _speed = 15;
-                     private int _damage = 0;
+    private float _speed = 15;
+    private int _damage = 0;
     public void Init(int damage)
     {
         _damage = damage;
-        Destroy(gameObject, 20);
+        Destroy(gameObject, 10);
     }
     private void Update()
     {

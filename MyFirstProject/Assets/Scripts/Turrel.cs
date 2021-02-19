@@ -20,7 +20,7 @@ public class Turrel : MonoBehaviour
         if (_fire && _timer < 0)
         {
             Fire();
-            _timer = 2f;
+            _timer = 1f;
         }
             
     }

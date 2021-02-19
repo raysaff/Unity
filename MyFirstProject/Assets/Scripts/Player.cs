@@ -13,10 +13,7 @@ public class Player : MonoBehaviour
                      private int _damage = 25;
                      private Vector3 _direction = Vector3.zero;
                      public int _ammo = 21;
-    private void Awake()
-    {
-        _health = 100;
-    }
+    private void Awake() => _health = 100;
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) _fire = true;

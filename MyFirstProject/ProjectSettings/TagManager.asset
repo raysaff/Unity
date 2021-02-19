@@ -9,6 +9,7 @@ TagManager:
   - Ammo
   - Bullet
   - Turrel
+  - Bomb
   layers:
   - Default
   - TransparentFX
