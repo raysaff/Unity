@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health = 100;
     [SerializeField] private Transform[] _points = null;
                      private NavMeshAgent navMeshAgent = null;
-                     private int currentPoint = 1;
+                     private int currentPoint = 0;
     public void Init(Transform[] points)
     {
         _points = points;
