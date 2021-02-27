@@ -7,19 +7,20 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private GameObject _minePref;
     [SerializeField] private Transform _bulletStartPosition;
-    [SerializeField] private int _health = 100;
+                     private int _health = 100;
                      private float _speed = 5;
                      private float _rotationSpeed = 45;
                      private bool _fire = false;
                      private bool _minePlanting = false;
                      private int _damage = 25;
                      private Vector3 _direction = Vector3.zero;
-                     public int _ammo = 21;
+                     private int _ammo = 21;
+
     private void Awake() => _health = 100;
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) _fire = true;
-        if (Input.GetMouseButtonDown(1)) _minePlanting = true;
+        if (Input.GetKeyDown(KeyCode.M)) _minePlanting = true;
         _direction.z = Input.GetAxis("Vertical");
     }
     private void FixedUpdate()
