@@ -20,15 +20,14 @@ public class Enemy : MonoBehaviour
         _health = 100;
     }
     private void Start()
-    {
-        if (_points[0] != null)
-        {
-            navMeshAgent.SetDestination(_points[0].position);
-        }
+    {  
+        // При спавне враг сразу отправляется к нулевой точке. 
+        navMeshAgent.SetDestination(_points[0].position);
     }
     private void Update()
     {
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && _points[0] != null)
+        // Ходить дальше враг ничинает, только если есть ещё точки патрулирования.
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && _points.Length > 1)
         {
             currentPoint = (currentPoint + 1) % _points.Length;
             navMeshAgent.SetDestination(_points[currentPoint].position);

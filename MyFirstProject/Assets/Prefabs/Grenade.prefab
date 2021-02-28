@@ -294,6 +294,8 @@ GameObject:
   - component: {fileID: 3513688303846765863}
   - component: {fileID: 219240294052488187}
   - component: {fileID: 7934981872830326033}
+  - component: {fileID: -6113594060289585738}
+  - component: {fileID: 1487355191277586372}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Grranade
@@ -379,3 +381,32 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &-6113594060289585738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566463604873867763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea0170858a8607488763892e93d8133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsInTrigger: []
+--- !u!54 &1487355191277586372
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566463604873867763}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.01
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

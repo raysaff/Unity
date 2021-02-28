@@ -11,6 +11,7 @@ TagManager:
   - Turrel
   - Bomb
   - Grranade
+  - StaticObj
   layers:
   - Default
   - TransparentFX

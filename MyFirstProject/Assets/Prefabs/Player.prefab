@@ -696,7 +696,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -717,9 +717,8 @@ MonoBehaviour:
   _bulletPref: {fileID: 4781165328180031640, guid: 20a9d266a702f004ebd0a034acf081d4,
     type: 3}
   _minePref: {fileID: 0}
+  _grenadePref: {fileID: 0}
   _bulletStartPosition: {fileID: 8328887776561328686}
-  _health: 100
-  _ammo: 21
 --- !u!1 &6986328586506754879
 GameObject:
   m_ObjectHideFlags: 0
