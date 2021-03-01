@@ -15,11 +15,6 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
-    private void Start()
-    {
-        ObjectsInTrigger.Clear();
-    }
-
     private void OnDestroy()
     {
         // Заполняем список объектами в радиусе взрыва, прямо перед самим взрывом.
