@@ -8,12 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _minePref;
     [SerializeField] private GameObject _grenadePref;
     [SerializeField] private Transform _bulletStartPosition;
-                     private Rigidbody player;
+                     private Rigidbody _player;
                      private int _health = 100;
                      private int _damage = 25;
 
                      private float _speed = 5;
-                     private float _rotationSpeed = 45;
+                     private float _rotationSpeed = 70;
                      private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
 
@@ -21,16 +21,15 @@ public class Player : MonoBehaviour
                      private bool _minePlanting = false;
                      private bool _grenade = false;
                      
-                     
                      private float _throwForce = 450;
-                     private float _start;
-                     private float _swing = 0; // Замах.
+                     private float _start=0;
+                     private float _swing = 0; 
 
 
     private void Awake()
     {
         _health = 100;
-        player = GetComponent<Rigidbody>();
+        _player = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -54,16 +53,15 @@ public class Player : MonoBehaviour
             _swing = (Time.time - _start);
 
             if (_swing >= 5)
-                _throwForce += 50;
+                _throwForce += 100;
             else
-                _throwForce += _swing * 10;
+                _throwForce += _swing * 20;
 
             _grenade = true;
         }
 
-        
         // Прыжок.
-        if(Input.GetKeyDown(KeyCode.Space) && player.velocity.y == 0) Jump();
+        if(Input.GetKeyDown(KeyCode.Space) && _player.velocity.y == 0) Jump();
 
         _direction.z = Input.GetAxis("Vertical");
     }
@@ -81,7 +79,7 @@ public class Player : MonoBehaviour
     }
     private void Jump()
     {
-        player.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _player.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
     private void MinePlant()

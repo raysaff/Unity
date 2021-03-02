@@ -10,7 +10,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _target = null;
     [SerializeField] private Transform _eye = null;
                      private NavMeshAgent navMeshAgent = null;
-    [SerializeField] private int currentPoint = 0;
+                     private int currentPoint = 0;
+                     private float _patrolSpeed = 3.5f;
+                     private float _chaseSpeed = 6f;
+                     private RaycastHit hit;
+                     private bool raycast = false;
 
     public void Init(Transform[] points, Transform target)
     {
@@ -25,39 +29,41 @@ public class Enemy : MonoBehaviour
     }
     private void Start()
     {  
-        // При спавне враг сразу отправляется к нулевой точке. 
-        if (_points.Length > 1)
-            Patrol();
-        else
-            navMeshAgent.SetDestination(_points[0].position);
+        // При спавне враг сразу отправляется к нулевой точке или идёт на патруль.
+        Patrol();
+    }
+
+    private void Update()
+    {
+        var direction = _target.position - _eye.position;
+        raycast = Physics.Raycast(_eye.position, direction, out hit, 20);
+
+        // Если в зоне видимости нет игрока.
+        if (!raycast || !hit.collider.gameObject.CompareTag("Player"))
+        {
+            Invoke("Patrol", 2);
+        } 
+        else 
+        {
+            CancelInvoke("Patrol");
+            Chase();
+        }
     }
 
     private void Patrol()
     {
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
+            navMeshAgent.speed = _patrolSpeed;
             currentPoint = (currentPoint + 1) % _points.Length;
-            navMeshAgent.SetDestination(_points[currentPoint].position);
         }
+        navMeshAgent.SetDestination(_points[currentPoint].position);
     }
+
     private void Chase()
     {
-        navMeshAgent.speed = 10f;
+        navMeshAgent.speed = _chaseSpeed;
         navMeshAgent.SetDestination(_target.position);
-    }
-    private void FixedUpdate()
-    {
-        RaycastHit hit;
-        var direction = _target.position - _eye.position;
-        var raycast = Physics.Raycast(_eye.position, direction, out hit, 20);
-
-        if (!raycast || !hit.collider.gameObject.CompareTag("Player"))
-        {
-            navMeshAgent.speed = 3.5f;
-            Invoke("Patrol", 2);
-        }
-        else
-            Chase();
     }
 
     public void TakeDamage(int damage)

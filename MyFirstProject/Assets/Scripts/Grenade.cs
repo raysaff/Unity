@@ -11,7 +11,7 @@ public class Grenade : MonoBehaviour
     {
         _damage = damage;
 
-        // Граната взрывается через 5 секунд.
+        // Граната "взрывается" через 5 секунд.
         Destroy(gameObject, 5);
     }
 
@@ -20,7 +20,7 @@ public class Grenade : MonoBehaviour
         // Заполняем список объектами в радиусе взрыва, прямо перед самим взрывом.
         ObjectsInTrigger = new List<Collider>(Physics.OverlapSphere(gameObject.transform.position, 5f));
 
-        // Бежим по списку отталкивая объекты в направлении от гранаты, а если это ещё и игрок или враг, то нанести им урон. 
+        // Бежим по списку отталкивая объекты в направлении "от гранаты", а если это ещё и игрок или враг, то нанести им урон. 
         foreach (Collider inZone in ObjectsInTrigger)
         {
                 if (inZone.GetComponent<Rigidbody>() != null)
