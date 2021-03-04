@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
                      private float _chaseSpeed = 6f;
                      private RaycastHit hit;
                      private bool raycast = false;
+                     private Animator _animator = null;
 
     public void Init(Transform[] points, Transform target)
     {
@@ -24,30 +25,29 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         _health = 100;
     }
     private void Start()
     {  
+
         // При спавне враг сразу отправляется к нулевой точке или идёт на патруль.
         Patrol();
     }
 
     private void Update()
     {
+        if (transform.hasChanged) _animator.SetBool("Go", true);
+        else _animator.SetBool("Go", false);
         var direction = _target.position - _eye.position;
         raycast = Physics.Raycast(_eye.position, direction, out hit, 20);
 
         // Если в зоне видимости нет игрока.
         if (!raycast || !hit.collider.gameObject.CompareTag("Player"))
-        {
-            Invoke("Patrol", 2);
-        } 
+            Patrol();
         else 
-        {
-            CancelInvoke("Patrol");
             Chase();
-        }
     }
 
     private void Patrol()
@@ -69,6 +69,11 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        if (_health <= 0) Destroy(gameObject);
+        if (_health <= 0) Death();
+    }
+    public void Death()
+    {
+        _animator.SetBool("Death", true);
+        Destroy(gameObject, 2);
     }
  }

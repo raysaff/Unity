@@ -23,11 +23,13 @@ public class Player : MonoBehaviour
                      
                      private float _throwForce = 450;
                      private float _start=0;
-                     private float _swing = 0; 
+                     private float _swing = 0;
+                     private Animator _animator = null;
 
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _health = 100;
         _player = GetComponent<Rigidbody>();
     }
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
         }
 
         // Прыжок.
-        if(Input.GetKeyDown(KeyCode.Space) && _player.velocity.y == 0) Jump();
+        if(Input.GetKeyDown(KeyCode.Space) && _player.position.y <2.2f) Jump();
 
         _direction.z = Input.GetAxis("Vertical");
     }
@@ -74,12 +76,19 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
+        if (_direction == Vector3.zero)
+            _animator.SetBool("Go", false);
+        else
+            _animator.SetBool("Go", true);
+
         transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
     private void Jump()
     {
+        _animator.SetBool("Jump", true);
         _player.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _animator.SetBool("Jump", false);
     }
 
     private void MinePlant()
@@ -91,9 +100,11 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
+        _animator.SetBool("Shoot", true);
         var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
         _fire = false;
+        _animator.SetBool("Shoot",false);
     }
 
     private void FireInTheHole()
@@ -113,6 +124,11 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        if (_health <= 0) Destroy(gameObject);
+        if (_health <= 0) Death();
+    }
+    private void Death()
+    {
+        //_animator.SetBool("Death", true);
+        Destroy(gameObject, 2);
     }
 }
