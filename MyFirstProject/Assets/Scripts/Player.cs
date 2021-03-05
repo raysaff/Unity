@@ -16,10 +16,12 @@ public class Player : MonoBehaviour
                      private float _rotationSpeed = 70;
                      private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
+                     private bool _jump = false;
 
                      private bool _fire = false;
                      private bool _minePlanting = false;
                      private bool _grenade = false;
+    private bool _reload = true;
                      
                      private float _throwForce = 450;
                      private float _start=0;
@@ -63,13 +65,14 @@ public class Player : MonoBehaviour
         }
 
         // Прыжок.
-        if(Input.GetKeyDown(KeyCode.Space) && _player.position.y <2.2f) Jump();
+        if (Input.GetKeyDown(KeyCode.Space) && _player.position.y < 2.2f) Jump();
 
         _direction.z = Input.GetAxis("Vertical");
     }
     private void FixedUpdate()
     {
-        if (_fire) Fire();
+        if (_player.position.y <2.2f) _animator.SetBool("Jump", false);
+        if (_fire && _reload) Fire();
         if (_minePlanting) MinePlant();
         if (_grenade) FireInTheHole();
         Move();
@@ -88,7 +91,6 @@ public class Player : MonoBehaviour
     {
         _animator.SetBool("Jump", true);
         _player.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-        _animator.SetBool("Jump", false);
     }
 
     private void MinePlant()
@@ -104,7 +106,14 @@ public class Player : MonoBehaviour
         var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
         _fire = false;
-        _animator.SetBool("Shoot",false);
+        _reload = false;
+        Invoke("Reload", 2);
+    }
+
+    private void Reload()
+    {
+        _reload = true;
+        _animator.SetBool("Shoot", false);
     }
 
     private void FireInTheHole()
