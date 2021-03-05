@@ -31,15 +31,12 @@ public class Enemy : MonoBehaviour
     }
     private void Start()
     {  
-
         // При спавне враг сразу отправляется к нулевой точке или идёт на патруль.
         Patrol();
     }
 
     private void Update()
     {
-        if (transform.hasChanged) _animator.SetBool("Go", true);
-        else _animator.SetBool("Go", false);
         var direction = _target.position - _eye.position;
         raycast = Physics.Raycast(_eye.position, direction, out hit, 20);
 
@@ -52,16 +49,24 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        //_animator.SetBool("Go", true); 
+        if (_points.Length==1) _animator.SetBool("Go", false);
+        else
         {
-            navMeshAgent.speed = _patrolSpeed;
-            currentPoint = (currentPoint + 1) % _points.Length;
+            _animator.SetBool("Go", true);
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                navMeshAgent.speed = _patrolSpeed;
+                currentPoint = (currentPoint + 1) % _points.Length;
+            }
+            navMeshAgent.SetDestination(_points[currentPoint].position);
         }
-        navMeshAgent.SetDestination(_points[currentPoint].position);
+ 
     }
 
     private void Chase()
     {
+        _animator.SetBool("Go", true);
         navMeshAgent.speed = _chaseSpeed;
         navMeshAgent.SetDestination(_target.position);
     }
@@ -74,6 +79,6 @@ public class Enemy : MonoBehaviour
     public void Death()
     {
         _animator.SetBool("Death", true);
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1);
     }
  }

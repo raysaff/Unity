@@ -16,12 +16,11 @@ public class Player : MonoBehaviour
                      private float _rotationSpeed = 70;
                      private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
-                     private bool _jump = false;
 
                      private bool _fire = false;
                      private bool _minePlanting = false;
                      private bool _grenade = false;
-    private bool _reload = true;
+                     private bool _reload = true;
                      
                      private float _throwForce = 450;
                      private float _start=0;
@@ -77,9 +76,17 @@ public class Player : MonoBehaviour
         if (_grenade) FireInTheHole();
         Move();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            _animator.SetBool("EndGame", true);
+        }
+    }
+
     private void Move()
     {
-        if (_direction == Vector3.zero)
+        if (_direction.z == 0)
             _animator.SetBool("Go", false);
         else
             _animator.SetBool("Go", true);
@@ -107,7 +114,7 @@ public class Player : MonoBehaviour
         bullet.Init(_damage);
         _fire = false;
         _reload = false;
-        Invoke("Reload", 2);
+        Invoke("Reload", 1);
     }
 
     private void Reload()
