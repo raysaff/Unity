@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
                      private Rigidbody _player;
                      private int _health = 100;
                      private int _damage = 25;
+                     private float _startRapid = 0;
+                     private bool _rapid = false;
 
                      private float _speed = 5;
                      private float _rotationSpeed = 70;
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
                      private bool _reload = true;
                      
                      private float _throwForce = 450;
-                     private float _start=0;
+                     private float _startSwing=0;
                      private float _swing = 0;
                      private Animator _animator = null;
 
@@ -37,6 +39,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (_rapid)
+        {
+            if (Time.time - _startRapid > 10)
+            {
+                _rapid = false;
+                _speed = 5;
+            }
+        }
+
+                
         // Стрельба.
         if (Input.GetMouseButtonDown(0)) _fire = true;
 
@@ -46,14 +58,14 @@ public class Player : MonoBehaviour
         // Было интересно добавить разную силу броска гранаты. Чем дольше зажимаешь ПКМ, тем сильнее бросаешь.
         if (Input.GetMouseButtonDown(1))
         {
-            _start = Time.time;
+            _startSwing = Time.time;
             _throwForce = 450;
             _swing = 0;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            _swing = (Time.time - _start);
+            _swing = (Time.time - _startSwing);
 
             if (_swing >= 5)
                 _throwForce += 100;
@@ -141,6 +153,13 @@ public class Player : MonoBehaviour
     {
         _health -= damage;
         if (_health <= 0) Death();
+    }
+
+    public void Rapid(float startRapid)
+    {
+        _rapid = true;
+        _speed *= 2;
+        _startRapid = startRapid;
     }
     private void Death()
     {
