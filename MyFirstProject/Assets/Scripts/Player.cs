@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject _bulletPref;
-    [SerializeField] private GameObject _minePref;
-    [SerializeField] private GameObject _grenadePref;
-    [SerializeField] private Transform _bulletStartPosition;
+    [SerializeField] private GameObject _bulletPref = null;
+    [SerializeField] private GameObject _minePref = null;
+    [SerializeField] private GameObject _grenadePref = null;
+    [SerializeField] private Transform _bulletStartPosition = null;
+    [Space]
+    [SerializeField] private GameObject _UI = null;
+    [SerializeField] private GameObject _endMsg = null;
+    
                      private Rigidbody _player;
                      private int _health = 100;
                      private int _damage = 25;
@@ -39,6 +44,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (_health > 20) _UI.GetComponent<Text>().color = new Color(0, 255, 31);
+        else _UI.GetComponent<Text>().color = new Color(255, 0, 0);
+        _UI.GetComponent<Text>().text = _health.ToString();
+
         if (_rapid)
         {
             if (Time.time - _startRapid > 10)
@@ -47,8 +56,7 @@ public class Player : MonoBehaviour
                 _speed = 5;
             }
         }
-
-                
+        
         // Стрельба.
         if (Input.GetMouseButtonDown(0)) _fire = true;
 
@@ -92,7 +100,8 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Finish"))
         {
-            _animator.SetBool("EndGame", true);
+            _endMsg.SetActive(true);
+            _endMsg.GetComponent<Text>().text = "Вы победили!";
         }
     }
 
@@ -163,7 +172,8 @@ public class Player : MonoBehaviour
     }
     private void Death()
     {
-        //_animator.SetBool("Death", true);
-        Destroy(gameObject, 2);
+        _endMsg.SetActive(true);
+        _endMsg.GetComponent<Text>().text = "Вы погибли";
+        //Destroy(gameObject, 2);
     }
 }
