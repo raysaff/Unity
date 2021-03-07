@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private GameObject _UI = null;
     [SerializeField] private GameObject _endMsg = null;
-    
+    [SerializeField] private GameObject _gameMenu = null;
+
                      private Rigidbody _player;
                      private int _health = 100;
                      private int _damage = 25;
@@ -44,6 +45,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _gameMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         if (_health > 20) _UI.GetComponent<Text>().color = new Color(0, 255, 31);
         else _UI.GetComponent<Text>().color = new Color(255, 0, 0);
         _UI.GetComponent<Text>().text = _health.ToString();
@@ -88,6 +95,7 @@ public class Player : MonoBehaviour
 
         _direction.z = Input.GetAxis("Vertical");
     }
+
     private void FixedUpdate()
     {
         if (_player.position.y <2.2f) _animator.SetBool("Jump", false);
@@ -96,6 +104,7 @@ public class Player : MonoBehaviour
         if (_grenade) FireInTheHole();
         Move();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Finish"))
@@ -115,6 +124,7 @@ public class Player : MonoBehaviour
         transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
+
     private void Jump()
     {
         _animator.SetBool("Jump", true);
@@ -170,10 +180,13 @@ public class Player : MonoBehaviour
         _speed *= 2;
         _startRapid = startRapid;
     }
+
     private void Death()
     {
+        _animator.SetBool("Death", true);
         _endMsg.SetActive(true);
         _endMsg.GetComponent<Text>().text = "Вы погибли";
-        //Destroy(gameObject, 2);
+
+        Destroy(gameObject, 3);
     }
 }

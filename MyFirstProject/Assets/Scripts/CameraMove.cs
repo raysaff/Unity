@@ -16,7 +16,7 @@ public class CameraMove : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = _player.transform.position - _player.transform.forward * _offset.magnitude;
-        transform.position = new Vector3(transform.position.x, _offset.y+1.5f, transform.position.z-1);
+        transform.position = new Vector3(transform.position.x+1, _offset.y+1.5f, transform.position.z-1);
         transform.rotation = Quaternion.Euler(_angle.x, _player.transform.rotation.eulerAngles.y, _angle.z);
     }
 }
