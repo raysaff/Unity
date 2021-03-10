@@ -16,6 +16,6 @@ public class Door : MonoBehaviour
     private void Update()
     {
         if (!isOpen) transform.position = _closed;
-        else transform.position = new Vector3(transform.position.x, transform.position.y-2, transform.position.z); ;
+        else transform.position = new Vector3(transform.position.x, transform.position.y-2, transform.position.z); 
     }
 }

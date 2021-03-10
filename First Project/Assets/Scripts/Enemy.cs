@@ -50,8 +50,11 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        //_animator.SetBool("Go", true); 
-        if (_points.Length==1) _animator.SetBool("Go", false);
+
+        if (_points.Length == 1)
+        {
+            _animator.SetBool("Go", false);
+        }
         else
         {
             _animator.SetBool("Go", true);

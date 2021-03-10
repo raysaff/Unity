@@ -10173,7 +10173,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -10425,11 +10425,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 09cbf0677dee8cf489162d8852a32ff1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4dc9f3427be991c41a0e828c639e0f7d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.522
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -19051,7 +19051,7 @@ PrefabInstance:
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
@@ -19061,7 +19061,7 @@ PrefabInstance:
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
@@ -19125,6 +19125,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5566463604873867763, guid: 70770522ce98ea4468d20d4a13cf2a42,
         type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4dc9f3427be991c41a0e828c639e0f7d, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3d31c8de27909748b611804b775d8f0, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: f01a9f62a34a82348998cf621eb04d35, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 20e4259d5fcca5c4094968193aeb04fa, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6320aa8d6a111404599dc01ae10cf942, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c7cf763d382d134088e0fd9a0506732, type: 3}
+    - target: {fileID: 787735340112254551, guid: 04e0719e739a089438de1a4cb494b375,
+        type: 3}
+      propertyPath: _noises.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b44f232f0a4739419efae28a3b384c0, type: 3}
     - target: {fileID: 911778310935955895, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
       propertyPath: m_RootOrder

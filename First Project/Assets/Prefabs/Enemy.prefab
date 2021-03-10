@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 363009315309156553}
   - component: {fileID: 5444969823469265190}
   - component: {fileID: 5059766504516195940}
+  - component: {fileID: 7064043462606191558}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -678,6 +679,11 @@ MonoBehaviour:
   - {fileID: 0}
   _target: {fileID: 0}
   _eye: {fileID: 1139218634999567364}
+  _noises:
+  - {fileID: 8300000, guid: 397e5d366c530f846a3adc815b7cc7a9, type: 3}
+  - {fileID: 8300000, guid: 82b8cf73e0223a74383c6364146c6087, type: 3}
+  - {fileID: 8300000, guid: 3b476292d4cf3a34085922ee953aa3a5, type: 3}
+  - {fileID: 8300000, guid: 12f7786fcd7fe784a9ad73949373f0df, type: 3}
 --- !u!195 &5444969823469265190
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -719,3 +725,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &7064043462606191558
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624970428269942236}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0

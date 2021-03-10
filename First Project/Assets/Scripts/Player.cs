@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Text _UI_health = null;
     [SerializeField] private GameObject _endMsg = null;
     [SerializeField] private GameObject _gameMenu = null;
+    [Space]
+    [SerializeField] private AudioClip[] _noises = null;
+                     private float _stepTimer = 0.5f;
+                     private float _stepTimerDown = 0;
 
                      private Rigidbody _player;
                      private int _health = 100;
@@ -23,7 +27,7 @@ public class Player : MonoBehaviour
 
                      private float _speed = 5;
                      private float _rotationSpeed = 90;
-    [SerializeField] private Vector3 _direction = Vector3.zero;
+                     private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
 
                      private bool _fire = false;
@@ -107,13 +111,16 @@ public class Player : MonoBehaviour
         if (_fire && _reload) Fire();
         if (_minePlanting) MinePlant();
         if (_grenade) FireInTheHole();
-        Move();
+
+        if (Input.GetAxis("Horizontal")!=0 || Input.GetAxis("Vertical")!=0) Move();
+        else _animator.SetBool("Go", false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Finish"))
         {
+            _audiosource.PlayOneShot(_noises[3]);
             _endMsg.SetActive(true);
             _endMsg.GetComponent<Text>().text = "Вы победили!";
             _animator.SetBool("EndGame", true);
@@ -128,13 +135,17 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        if (_direction.z == 0)
-            _animator.SetBool("Go", false);
+        if (_stepTimerDown<0)
+        {
+            _audiosource.PlayOneShot(_noises[0]);
+            _stepTimerDown = _stepTimer;
+        }
         else
-            _animator.SetBool("Go", true);
-
-        _player.AddForce(0,0,_direction.z, ForceMode.VelocityChange);
-        //transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
+        {
+            _stepTimerDown -= Time.deltaTime;
+        }
+        _animator.SetBool("Go", true);
+        transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
 
@@ -142,6 +153,7 @@ public class Player : MonoBehaviour
     {
         _animator.SetBool("Jump", true);
         _player.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _audiosource.PlayOneShot(_noises[1]);
     }
 
     private void MinePlant()
@@ -156,7 +168,7 @@ public class Player : MonoBehaviour
         _animator.SetBool("Shoot", true);
         var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
-        _audiosource.Play();
+        _audiosource.PlayOneShot(_noises[2]);
         _fire = false;
         _reload = false;
         Invoke("Reload", 1);
@@ -164,6 +176,7 @@ public class Player : MonoBehaviour
 
     private void Reload()
     {
+        _audiosource.PlayOneShot(_noises[5]);
         _reload = true;
         _animator.SetBool("Shoot", false);
     }
@@ -180,6 +193,7 @@ public class Player : MonoBehaviour
     public void TakeCare(int HP)
     {
         _health += HP;
+        _audiosource.PlayOneShot(_noises[6]);
     }
 
     public void TakeDamage(int damage)
@@ -200,7 +214,7 @@ public class Player : MonoBehaviour
         _animator.SetBool("Death", true);
         _endMsg.SetActive(true);
         _endMsg.GetComponent<Text>().text = "Вы погибли";
-
+        _audiosource.PlayOneShot(_noises[4]);
         Destroy(gameObject, 3);
     }
 }
