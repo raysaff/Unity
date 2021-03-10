@@ -11,6 +11,11 @@ public class Turrel : MonoBehaviour
                      private bool _fire = false;
                      private int _damage = 4;
                      private float _timer = 1f; // таймер, чтобы туррель не стреляла слишком часто
+                     private AudioSource _audiosource = null;
+    private void Awake()
+    {
+        _audiosource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         //от таймера отнимаем дельтатайм
@@ -47,5 +52,6 @@ public class Turrel : MonoBehaviour
     {
         var bullet = GameObject.Instantiate(_bulletPref, _bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
+        _audiosource.Play();
     }
 }

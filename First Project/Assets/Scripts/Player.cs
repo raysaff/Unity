@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
                      private bool _rapid = false;
 
                      private float _speed = 5;
-                     private float _rotationSpeed = 70;
-                     private Vector3 _direction = Vector3.zero;
+                     private float _rotationSpeed = 90;
+    [SerializeField] private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
 
                      private bool _fire = false;
@@ -35,10 +35,12 @@ public class Player : MonoBehaviour
                      private float _startSwing=0;
                      private float _swing = 0;
                      private Animator _animator = null;
+                     private AudioSource _audiosource = null;
 
 
     private void Awake()
     {
+        _audiosource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         _health = 100;
         _player = GetComponent<Rigidbody>();
@@ -95,7 +97,7 @@ public class Player : MonoBehaviour
 
         // Прыжок.
         if (Input.GetKeyDown(KeyCode.Space) && _player.position.y < 2.2f) Jump();
-
+      
         _direction.z = Input.GetAxis("Vertical");
     }
 
@@ -118,6 +120,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+            TakeDamage(20);
+    }
+
     private void Move()
     {
         if (_direction.z == 0)
@@ -125,7 +133,8 @@ public class Player : MonoBehaviour
         else
             _animator.SetBool("Go", true);
 
-        transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
+        _player.AddForce(0,0,_direction.z, ForceMode.VelocityChange);
+        //transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }
 
@@ -147,6 +156,7 @@ public class Player : MonoBehaviour
         _animator.SetBool("Shoot", true);
         var bullet = GameObject.Instantiate(_bulletPref,_bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
+        _audiosource.Play();
         _fire = false;
         _reload = false;
         Invoke("Reload", 1);
