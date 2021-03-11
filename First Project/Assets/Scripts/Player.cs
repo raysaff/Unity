@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
                      private float _startRapid = 0;
                      private bool _rapid = false;
 
-                     private float _speed = 5;
+                     private float _speed = 3;
                      private float _rotationSpeed = 90;
                      private Vector3 _direction = Vector3.zero;
                      private float _jumpForce = 500;
@@ -145,6 +145,7 @@ public class Player : MonoBehaviour
             _stepTimerDown -= Time.deltaTime;
         }
         _animator.SetBool("Go", true);
+        //_player.AddForce(_direction*200, ForceMode.VelocityChange);
         transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }

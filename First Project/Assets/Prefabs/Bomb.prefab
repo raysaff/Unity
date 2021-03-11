@@ -498,6 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosion: {fileID: 8300000, guid: f2cd3a6eb4f9fa34f8fe218fc871c1b2, type: 3}
+  _explosionPrefab: {fileID: 6481675494850329826, guid: 0d2ed848a5b3ae348b2684e4d7c19d3b,
+    type: 3}
 --- !u!54 &-8219478202572500919
 Rigidbody:
   m_ObjectHideFlags: 0

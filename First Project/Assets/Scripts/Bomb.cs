@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     [SerializeField] private AudioClip _explosion = null;
-    private int _damage = 150;
-    private float _rotSpeed = 40;
-    private AudioSource _audioSource = null;
+    [SerializeField] private GameObject _explosionPrefab = null;
+                     private int _damage = 150;
+                     private float _rotSpeed = 40;
+                     private AudioSource _audioSource = null;
 
     private void Awake()
     {
@@ -21,7 +22,9 @@ public class Bomb : MonoBehaviour
 
     private void Explosion()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+        var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
+        Destroy(explosion, 2);
         Destroy(gameObject, 4);
     }
 

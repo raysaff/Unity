@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    private int _damage = 150;
-    private List<Collider> ObjectsInTrigger;
-    private AudioSource _audioSource = null;
+    [SerializeField] private GameObject _explosionPrefab = null;
+                     private int _damage = 150;
+                     private List<Collider> ObjectsInTrigger;
+                     private AudioSource _audioSource = null;
 
     private void Awake()
     {
@@ -39,8 +40,9 @@ public class Grenade : MonoBehaviour
             if (inZone.CompareTag("Enemy"))
                 inZone.GetComponent<Enemy>().TakeDamage(_damage);
         }
-
+        var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+        Destroy(explosion, 2);
         Destroy(gameObject, 2);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
+    [SerializeField] private GameObject _explosionPrefab = null;
     [SerializeField] private AudioClip _plant = null;
                      private int _damage = 150;
                      private List<Collider> ObjectsInTrigger;
@@ -36,7 +37,9 @@ public class Mine : MonoBehaviour
                     inZone.GetComponent<Player>().TakeDamage(_damage/2);
             }
             _audioSource.Play();
-            transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+            var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
+            Destroy(explosion, 2);
             Destroy(gameObject, 4);
         }   
     }

@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour
                      private AudioSource _audioSource = null;
                      private Vector3 _offsetOne = Vector3.zero;
                      private Vector3 _offsetTwo = Vector3.zero;
-    private float _stepTimer = 0.5f;
-    private float _stepTimerDown = 0;
+                     private float _stepTimer = 0.5f;
+                     private float _stepTimerDown = 0;
 
     public void Init(Transform[] points, Transform target)
     {
