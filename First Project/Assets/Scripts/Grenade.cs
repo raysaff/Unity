@@ -11,6 +11,7 @@ public class Grenade : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = GameSet.instance.volume;
     }
 
     public void Init(int damage)

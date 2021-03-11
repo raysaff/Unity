@@ -11,6 +11,7 @@ public class Settings : MonoBehaviour
     [SerializeField] private Button _okButton = null;
     [SerializeField] private Toggle _hudToggle = null;
     [SerializeField] private Slider _enemySpeedSlider = null;
+    [SerializeField] private Slider _soundsVolumeSlider = null;
     [SerializeField] private Text _enemySpeed;
 
     private void Awake()
@@ -18,6 +19,7 @@ public class Settings : MonoBehaviour
         _okButton.onClick.AddListener(ShowMenu);
         _hudToggle.onValueChanged.AddListener(ShowHUD);
         _enemySpeedSlider.onValueChanged.AddListener(EnemySpeedChange);
+        _soundsVolumeSlider.onValueChanged.AddListener(VolumeChange);
     }
 
     private void ShowMenu()
@@ -30,9 +32,15 @@ public class Settings : MonoBehaviour
     {
         GameSet.instance.HUD = value;
     }
+
     private void EnemySpeedChange(float value)
     {
         GameSet.instance.enemySpeed = value;
         _enemySpeed.text = "Enemy Speed = " + value.ToString();
+    }
+
+    private void VolumeChange(float value)
+    {
+        GameSet.instance.volume = value;
     }
 }

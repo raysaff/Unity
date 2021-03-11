@@ -41,10 +41,10 @@ public class Player : MonoBehaviour
                      private Animator _animator = null;
                      private AudioSource _audiosource = null;
 
-
     private void Awake()
     {
         _audiosource = GetComponent<AudioSource>();
+        _audiosource.volume = GameSet.instance.volume;
         _animator = GetComponent<Animator>();
         _health = 100;
         _player = GetComponent<Rigidbody>();

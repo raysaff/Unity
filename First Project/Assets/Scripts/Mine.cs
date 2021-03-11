@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    private int _damage = 150;
-    private List<Collider> ObjectsInTrigger;
-    public void Init(int damage) => _damage = damage;
+    [SerializeField] private AudioClip _plant = null;
+                     private int _damage = 150;
+                     private List<Collider> ObjectsInTrigger;
+                     private AudioSource _audioSource = null;
+    
+    public void Init(int damage)
+    {
+        _damage = damage;
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.PlayOneShot(_plant);
+        _audioSource.volume = GameSet.instance.volume;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -25,9 +35,9 @@ public class Mine : MonoBehaviour
                 if (inZone.CompareTag("Player"))
                     inZone.GetComponent<Player>().TakeDamage(_damage/2);
             }
-            Destroy(gameObject);
-        }
-
-        
-}
+            _audioSource.Play();
+            transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+            Destroy(gameObject, 4);
+        }   
+    }
 }

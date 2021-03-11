@@ -8,6 +8,7 @@ public class GameSet : MonoBehaviour
 
     public bool HUD = true;
     public float enemySpeed = 6;
+    public float volume = 0.7f;
 
     private void Awake()
     {
