@@ -10,16 +10,18 @@ public class Boss : MonoBehaviour
     [SerializeField] private AudioClip _final = null;
     [SerializeField] private GameObject _endGame = null;
                      private AudioSource _audioSource = null;
+                     private Animator _animator = null;
                      public bool anger = false;
                      private int _health = 100;
                      private float _timer = 1f;
                      private float _speed = 3;
                      private int _damage = 5;
-    private Animator _animator = null;
+    
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = GameSet.instance.volume;
         _animator = GetComponent<Animator>();
     }
 
@@ -36,7 +38,7 @@ public class Boss : MonoBehaviour
         if (_timer < 0)
         {
             Fire();
-            _timer = 1f;
+            _timer = 3f;
         }
     }
     private void Fire()

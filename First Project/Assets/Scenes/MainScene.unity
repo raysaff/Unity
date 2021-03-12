@@ -9429,7 +9429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058041869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.74, z: 0.667}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.651}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1579178657}
@@ -10546,7 +10546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168925309}
   m_LocalRotation: {x: 0.116097994, y: 0.69751084, z: -0.116097994, w: 0.69751084}
-  m_LocalPosition: {x: 204.9, y: 4.3, z: -15.3}
+  m_LocalPosition: {x: -15.6, y: 4.3, z: -47.39}
   m_LocalScale: {x: 0.87648, y: 0.98279995, z: 1.0344}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12466,7 +12466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364327395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 227.61, y: 2.7, z: -14.16}
+  m_LocalPosition: {x: 227.61, y: 2.05, z: -14.16}
   m_LocalScale: {x: 0.49458, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1538499567}
@@ -18732,9 +18732,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d5216ee0980ba2549b62ccbfff1e8422, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -33772,7 +33772,7 @@ PrefabInstance:
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 206.67001
+      value: -13.829978
       objectReference: {fileID: 0}
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
@@ -33782,7 +33782,7 @@ PrefabInstance:
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.489998
+      value: -46.579998
       objectReference: {fileID: 0}
     - target: {fileID: 293996695342094025, guid: 04e0719e739a089438de1a4cb494b375,
         type: 3}
