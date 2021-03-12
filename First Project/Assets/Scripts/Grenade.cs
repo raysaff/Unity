@@ -39,6 +39,9 @@ public class Grenade : MonoBehaviour
 
             if (inZone.CompareTag("Enemy"))
                 inZone.GetComponent<Enemy>().TakeDamage(_damage);
+
+            if (inZone.CompareTag("Boss"))
+                inZone.GetComponent<Boss>().TakeDamage(_damage);
         }
         var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);

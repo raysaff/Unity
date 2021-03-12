@@ -19,16 +19,15 @@ public class Bullet: MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {
             other.gameObject.GetComponent<Player>().TakeDamage(_damage);
-            Destroy(gameObject);
-        }
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
-            Destroy(gameObject);
-        }
 
+        if (other.gameObject.CompareTag("Enemy"))
+            other.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
+
+        if (other.gameObject.CompareTag("Boss"))
+            other.gameObject.GetComponent<Boss>().TakeDamage(_damage);
+
+        Destroy(gameObject);
     }
 
 }
