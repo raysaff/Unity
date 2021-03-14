@@ -7,6 +7,7 @@ public class Turrel : MonoBehaviour
     [SerializeField] private GameObject _bulletPref; //здесь определяем какой объект появится
     [SerializeField] private Transform _bulletStartPosition; //здесь определяем, где ему появиться
     [SerializeField] private Transform _target = null; //цель для вращения туррели
+    [SerializeField] private AudioClip _shot = null;
                      private float _speed = 3;
                      private bool _fire = false;
                      private int _damage = 4;
@@ -53,6 +54,6 @@ public class Turrel : MonoBehaviour
     {
         var bullet = GameObject.Instantiate(_bulletPref, _bulletStartPosition.position, _bulletStartPosition.rotation).GetComponent<Bullet>();
         bullet.Init(_damage);
-        _audiosource.Play();
+        _audiosource.PlayOneShot(_shot);
     }
 }

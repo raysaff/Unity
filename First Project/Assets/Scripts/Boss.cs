@@ -38,7 +38,7 @@ public class Boss : MonoBehaviour
         if (_timer < 0)
         {
             Fire();
-            _timer = 3f;
+            _timer = 2f;
         }
     }
     private void Fire()

@@ -25,10 +25,10 @@ public class Player : MonoBehaviour
                      private float _startRapid = 0;
                      private bool _rapid = false;
 
-                     private float _speed = 3;
+                     private float _speed = 2;
                      private float _rotationSpeed = 90;
                      private Vector3 _direction = Vector3.zero;
-                     private float _jumpForce = 500;
+                     private float _jumpForce = 700;
 
                      private bool _fire = false;
                      private bool _minePlanting = false;
@@ -40,9 +40,11 @@ public class Player : MonoBehaviour
                      private float _swing = 0;
                      private Animator _animator = null;
                      private AudioSource _audiosource = null;
+    private AudioListener _listener = null;
 
     private void Awake()
     {
+        _listener = GetComponent<AudioListener>();
         _audiosource = GetComponent<AudioSource>();
         _audiosource.volume = GameSet.instance.volume;
         _animator = GetComponent<Animator>();
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            _listener.enabled = false;
             _gameMenu.SetActive(true);
             Time.timeScale = 0;
         }
@@ -121,16 +124,11 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             _audiosource.PlayOneShot(_noises[3]);
+            _audiosource.volume = 0.3f;
             _endMsg.SetActive(true);
             _endMsg.GetComponent<Text>().text = "Вы победили!";
             _animator.SetBool("EndGame", true);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-            TakeDamage(20);
     }
 
     private void Move()
@@ -145,7 +143,6 @@ public class Player : MonoBehaviour
             _stepTimerDown -= Time.deltaTime;
         }
         _animator.SetBool("Go", true);
-        //_player.AddForce(_direction*200, ForceMode.VelocityChange);
         transform.Translate(_direction * _speed * Time.fixedDeltaTime * 3);
         transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime, 0));
     }

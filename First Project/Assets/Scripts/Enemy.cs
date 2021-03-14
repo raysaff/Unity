@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health = 100;
+    [SerializeField] private int _health = 25;
     [SerializeField] private Transform[] _points = null;
     [SerializeField] private Transform _target = null;
     [SerializeField] private Transform _eye = null;
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         _chaseSpeed = GameSet.instance.enemySpeed;
         _animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        _health = 100;
+        _health = 25;
         
     }
     private void Start()
@@ -105,6 +105,16 @@ public class Enemy : MonoBehaviour
         navMeshAgent.SetDestination(_target.position);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _audioSource.PlayOneShot(_noises[3]);
+            collision.gameObject.GetComponent<Player>().TakeDamage(5);
+        }
+            
+    }
+
     public void TakeDamage(int damage)
     {
         _health -= damage;
@@ -114,6 +124,7 @@ public class Enemy : MonoBehaviour
     {
         _audioSource.PlayOneShot(_noises[2]);
         _animator.SetBool("Death", true);
+        navMeshAgent.isStopped = true;
         Destroy(gameObject, 1);
     }
  }

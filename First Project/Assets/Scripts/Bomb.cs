@@ -25,7 +25,7 @@ public class Bomb : MonoBehaviour
         var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
         Destroy(explosion, 2);
-        Destroy(gameObject, 4);
+        Destroy(gameObject, 2);
     }
 
     private void OnTriggerEnter(Collider other)
